@@ -1,2 +1,2 @@
 # BPNeuralNetwork
-My first NN project based on the book *Make Your Own Neural Network*
+My first Neural Network project based on the book *Make Your Own Neural Network*
