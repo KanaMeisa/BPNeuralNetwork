@@ -2,7 +2,7 @@ import numpy as np
 import scipy.special  # sigmoid function
 
 
-class BPNN:
+class BPNeuralNetwork:
     def __init__(self, input_nodes, hidden_nodes, output_nodes, hidden_layers, learning_rate):
         self.input_nodes = input_nodes
         self.hidden_nodes = hidden_nodes
