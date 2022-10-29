@@ -9,9 +9,9 @@ mpl.use('TkAgg')
 inputNodes = 784
 hiddenNodes = 100
 outputNodes = 10
-hiddenLayers = 3
-learningRate = 0.003
-epoch = 5
+hiddenLayers = 2
+learningRate = 0.001
+epoch = 50
 
 Network1 = Basic_Framework.BPNeuralNetwork(
     inputNodes, hiddenNodes, outputNodes, hiddenLayers, learningRate)
