@@ -3,6 +3,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import imageio.v2 as imageio
 import scipy.special
+import softmax
 mpl.use('TkAgg')
 
 
@@ -73,13 +74,13 @@ hiddennodes = 100
 outputnodes = 10
 hiddenlayers = 3
 learningrate = 0.003
-epoch = 40
+epoch = 1
 
-training_data_file = open("/home/kana/Desktop/Python_Test/DPNN_Test1/mnist_train.csv")  # 打开文件
+training_data_file = open("/home/kana/Desktop/Python_Test/DataBase/mnist_train.csv")  # 打开文件
 training_data_list = training_data_file.readlines()  # 逐行读取，在训练数据集中，一行数据就是一张图片
 training_data_file.close()  # 关闭文件
 
-test_data_file = open('/home/kana/Desktop/Python_Test/DPNN_Test1/mnist_test.csv')
+test_data_file = open('/home/kana/Desktop/Python_Test/DataBase/mnist_test.csv')
 test_data_list = test_data_file.readlines()
 test_data_file.close()
 
@@ -103,6 +104,9 @@ for i in range(0, epoch):
         all_values = line.split(',')
         inputs = (np.asfarray(all_values[1:]) / 255.0 * 0.99) + 0.01
         fiout = myNN.query(inputs)
+        rfiout = np.zeros([10, 1])
+        for i in range(0, 10):
+            pass
         label = np.argmax(fiout)
         if int(label) == int(all_values[0]):
             Right += 1
@@ -122,3 +126,4 @@ while userinput == 'y':
     plt.show()
     print()
     userinput = input("INPUT: ")
+
