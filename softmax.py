@@ -7,5 +7,5 @@ def softmax(target, numbers):
     n = numbers.shape[0]
     for i in range(0, n):
         sums += math.exp(numbers[i, 0])
-    answer = math.exp(numbers[target-1, 0]) / sums
+    answer = math.exp(numbers[target, 0]) / sums
     return answer
