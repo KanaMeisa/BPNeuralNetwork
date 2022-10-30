@@ -13,7 +13,7 @@ hiddenNodes = 100
 outputNodes = 10
 hiddenLayers = 2
 learningRate = 0.001
-epoch = 50
+epoch = 99999
 
 Network1 = Basic_Framework.BPNeuralNetwork(
     inputNodes, hiddenNodes, outputNodes, hiddenLayers, learningRate)
@@ -73,10 +73,10 @@ while userinput == 'y':
     for k in range(0, 10):
         softmaxOutput[k, 0] = softmax.softmax(k, finalOutput)
     # label = np.argmax(finalOutput)
-    label = np.argmax(finalOutput)
+    label = np.argmax(softmaxOutput)
 
     print(label)
-    print(finalOutput)
+    print(softmaxOutput)
 
     plt.imshow(img_array, cmap='Greys', interpolation='None')
     plt.show()
