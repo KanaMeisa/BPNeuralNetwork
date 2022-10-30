@@ -3,6 +3,8 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import imageio.v2 as imageio
 import Basic_Framework
+import softmax
+
 mpl.use('TkAgg')
 
 
@@ -36,23 +38,30 @@ for line in training_data_list:
     input_list.append(inputs)
     target_list.append(targets)
 
+userinput1 = 'y'
+while userinput1 == 'y':
+    for i in range(0, epoch):
+        for j in range(0, len(input_list)):
+            Network1.train(input_list[j], target_list[j])
+        Right = int(0)
+        for line in test_data_list:
+            all_values = line.split(',')
+            inputs = (np.asfarray(all_values[1:]) / 255.0 * 0.99) + 0.01
 
-for i in range(0, epoch):
-    for j in range(0, len(input_list)):
-        Network1.train(input_list[j], target_list[j])
-    Right = int(0)
-    for line in test_data_list:
-        all_values = line.split(',')
-        inputs = (np.asfarray(all_values[1:]) / 255.0 * 0.99) + 0.01
+            finalOutput = Network1.query(inputs)
+            softmaxOutput = np.zeros([outputNodes, 1])
+            for k in range(0, 10):
+                softmaxOutput[k, 0] = softmax.softmax(k, finalOutput)
+            # label = np.argmax(finalOutput)
+            label = np.argmax(softmaxOutput)
 
-        finalOutput = Network1.query(inputs)
-        label = np.argmax(finalOutput)
-
-        if int(label) == int(all_values[0]):
-            Right += 1
-    print(f"Epoch {i+1} : {Right}%")
+            if int(label) == int(all_values[0]):
+                Right += 1
+        print(f"Epoch {i+1} : {Right}%")
+        userinput1 = input()
 
 
+print()
 userinput = 'y'
 while userinput == 'y':
     img_array = imageio.imread("TestPic1.png", pilmode='F')
@@ -60,6 +69,10 @@ while userinput == 'y':
     img_data = (img_data / 255.0 * 0.99) + 0.01
 
     finalOutput = Network1.query(img_data)
+    softmaxOutput = np.zeros([outputNodes, 1])
+    for k in range(0, 10):
+        softmaxOutput[k, 0] = softmax.softmax(k, finalOutput)
+    # label = np.argmax(finalOutput)
     label = np.argmax(finalOutput)
 
     print(label)
